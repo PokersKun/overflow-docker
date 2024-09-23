@@ -13,6 +13,9 @@ RUN wget https://github.com/MrXiaoM/mirai-console-loader/releases/download/v2.1.
 # 解压 with-overflow.zip 到 overflow 文件夹
 RUN unzip with-overflow.zip -d overflow
 
+# 确保 mcl 文件具有执行权限
+RUN chmod +x /app/overflow/mcl
+
 # 进入解压目录
 WORKDIR /app/overflow
 
