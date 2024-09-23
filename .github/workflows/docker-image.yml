@@ -30,4 +30,4 @@ jobs:
             linux/amd64
             linux/arm64
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/$(echo "${{ github.repository }}" | cut -d'/' -f2):latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
