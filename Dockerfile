@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim
 
 # 设置工作目录
-WORKDIR /overflow
+WORKDIR /app
 
 # 安装 wget 和 unzip 以下载和解压文件
 RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
@@ -14,7 +14,7 @@ RUN wget https://github.com/MrXiaoM/mirai-console-loader/releases/download/v2.1.
 RUN unzip with-overflow.zip -d overflow
 
 # 进入解压目录
-WORKDIR /overflow
+WORKDIR /app/overflow
 
 # 执行 mcl -u 命令以运行程序
 CMD ["./mcl", "-u"]
