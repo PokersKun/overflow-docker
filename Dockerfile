@@ -13,14 +13,11 @@ RUN apk add --no-cache wget unzip
 # 下载 with-overflow.zip
 RUN wget https://github.com/MrXiaoM/mirai-console-loader/releases/download/v2.1.2-patch1/with-overflow.zip
 
-# 解压 with-overflow.zip
-RUN unzip with-overflow.zip -d overflow
+# 直接解压 with-overflow.zip 到当前工作目录
+RUN unzip with-overflow.zip
 
 # 确保 mcl 文件具有执行权限
 RUN chmod +x /overflow/mcl
-
-# 进入解压目录
-WORKDIR /overflow
 
 # 执行 mcl -u 命令以运行程序
 CMD ["./mcl", "-u"]
