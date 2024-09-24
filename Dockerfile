@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists
 RUN wget https://github.com/MrXiaoM/mirai-console-loader/releases/download/v2.1.2-patch1/with-overflow.zip
 
 # 解压 with-overflow.zip 到 overflow 文件夹
-RUN unzip with-overflow.zip -d overflow
+RUN unzip with-overflow.zip 
 
 # 确保 mcl 文件具有执行权限
 RUN chmod +x /overflow/mcl
