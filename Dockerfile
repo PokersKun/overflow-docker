@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /overflow
 
 # 安装 wget 和 unzip 以下载和解压文件
-RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget unzip libgl1-mesa-glx fontconfig && rm -rf /var/lib/apt/lists/*
 
 # 下载 with-overflow.zip
 RUN wget https://github.com/MrXiaoM/mirai-console-loader/releases/download/v2.1.2-patch1/with-overflow.zip
