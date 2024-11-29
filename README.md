@@ -12,7 +12,7 @@ docker-compose：
 version: '3'
 services:
   overflow:
-    image: huild/overflow-docker:latest
+    image: registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker
     container_name: overflow
     restart: always
     environment:
@@ -20,7 +20,6 @@ services:
     volumes:
       - ./plugins:/overflow/plugins
       - ./config:/overflow/config
-      - ./bots:/overflow/bots
       - ./logs:/overflow/logs
       - ./data:/overflow/data
       - ./overflow.json:/overflow/overflow.json
