@@ -2,7 +2,9 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /overflow
 
-COPY . /overflow
+COPY ./overflow /overflow
+
+RUN sudo apt update && sudo apt install libgl1-mesa-glx
 
 RUN chmod +x /overflow/start.sh
 
