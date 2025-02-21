@@ -4,7 +4,7 @@ WORKDIR /overflow
 
 COPY ./overflow /overflow
 
-RUN apt update && apt install -y libgl1-mesa-glx
+RUN apt update && apt install -y libgl1-mesa-glx libfontconfig1
 
 RUN chmod +x /overflow/start.sh
 
