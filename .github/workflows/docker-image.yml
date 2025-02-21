@@ -26,7 +26,8 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         docker login -u "${{ secrets.REGISTRY_USERNAME }}" -p "${{ secrets.REGISTRY_PASSWORD }}" registry.cn-hangzhou.aliyuncs.com
-        docker build -t registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ env.latest_version }} . 
-        docker tag registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ env.latest_version }} registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:latest
+        docker build -t registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ env.latest_version }} \
+                      -t registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:latest .
         docker push registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ env.latest_version }}
         docker push registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:latest
+  
