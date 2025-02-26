@@ -1,18 +1,45 @@
-name: Docker Image CI
+name: Auto Build Overflow
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+  schedule:
+    - cron: '0 3 * * *'  # 每天 UTC 时间 3 点自动构建
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        path: 'src'  # 将仓库内容检出到 src 目录
+
+    - name: Get latest version
+      id: version
+      run: |
+        METADATA_URL="https://repo.maven.apache.org/maven2/top/mrxiaom/mirai/overflow-core-all/maven-metadata.xml"
+        LATEST=$(curl -s $METADATA_URL | grep -oP '<latest>\K[^<]+')
+        echo "version=${LATEST}" >> $GITHUB_OUTPUT
+
+    - name: Log in to Alibaba Cloud Container Registry
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.ALIYUN_USERNAME }}  # Set these in your GitHub Secrets
+        password: ${{ secrets.ALIYUN_PASSWORD }}  # Set these in your GitHub Secrets
+        registry: registry.cn-hangzhou.aliyuncs.com  # Adjust this based on your region
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: src  # 重要！指定构建上下文为包含 overflow 目录的路径
+        file: src/Dockerfile
+        build-args: |
+          OVERFLOW_VERSION=${{ steps.version.outputs.version }}
+        tags: |
+          registry.cn-hangzhou.aliyuncs.com/your-repository/overflow:latest
+          registry.cn-hangzhou.aliyuncs.com/your-repository/overflow:${{ steps.version.outputs.version }}
+        push: true
+      env:
+        DOCKER_BUILDKIT: 1
