@@ -1,5 +1,5 @@
 # 第一阶段：构建环境（用于下载依赖）
-FROM maven:3.9-openjdk-21 as builder
+FROM maven:latest as builder
 
 # 设置工作目录为 /overflow
 WORKDIR /overflow
