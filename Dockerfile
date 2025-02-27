@@ -16,6 +16,6 @@ RUN apt-get update && \
 
 VOLUME ["/overflow"]
 
-RUN chmod +x start.sh
+RUN chmod +x start.sh && start.sh
 
 CMD ["/overflow/start.sh"]
