@@ -19,7 +19,7 @@ jobs:
       run: |
         METADATA_URL="https://repo.maven.apache.org/maven2/top/mrxiaom/mirai/overflow-core-all/maven-metadata.xml"
         LATEST=$(curl -s $METADATA_URL | grep -oP '<latest>\K[^<]+')
-        echo "version=${LATEST}" >> $GITHUB_OUTPUT
+        echo "version=${LATEST}" >> $GITHUB_ENV
 
     - name: Log in to Alibaba Cloud Container Registry
       uses: docker/login-action@v2
@@ -31,13 +31,14 @@ jobs:
     - name: Build Docker image
       uses: docker/build-push-action@v5
       with:
-        context: src  # 重要！指定构建上下文为包含 overflow 目录的路径
-        file: src/Dockerfile
+        context: .
+        file: Dockerfile 
         build-args: |
-          OVERFLOW_VERSION=${{ steps.version.outputs.version }}
+          OVERFLOW_VERSION=${{ env.version }}
         tags: |
           registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:latest
-          registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ steps.version.outputs.version }}
+          registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ env.version }}
         push: true
       env:
         DOCKER_BUILDKIT: 1
+  
