@@ -12,6 +12,8 @@ RUN apt-get update && \
     apt-get remove --purge -y curl && \
     apt-get clean
 
+VOLUME ["/overflow"]
+
 RUN chmod +x start.sh
 
 CMD ["./start.sh"]
