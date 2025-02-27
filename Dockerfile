@@ -1,10 +1,9 @@
-# 第一阶段：构建环境
 FROM openjdk:17-jdk-slim
 
-WORKDIR /overflow
 COPY ./overflow ./
 
-# 下载 overflow-core-all 和 Kotlin 运行库
+WORKDIR /overflow
+
 ARG OVERFLOW_VERSION
 RUN apt-get update && \
     apt-get install -y curl && \
@@ -13,8 +12,6 @@ RUN apt-get update && \
     apt-get remove --purge -y curl && \
     apt-get clean
 
-# 配置运行环境
 RUN chmod +x start.sh
 
-# 启动命令（包含所有依赖）
 CMD ["./start.sh"]
