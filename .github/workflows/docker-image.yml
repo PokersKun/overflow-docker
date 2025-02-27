@@ -13,11 +13,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        path: 'app'  # 将仓库内容检出到 src 目录
-
-    - name: Copy overflow folder
-      run: cp -r app/overflow /overflow  # 复制overflow文件夹到根目录
 
     - name: Get latest version
       id: version
@@ -37,7 +32,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: src  # 重要！指定构建上下文为包含 overflow 目录的路径
-        file: app/Dockerfile
+        file: src/Dockerfile
         build-args: |
           OVERFLOW_VERSION=${{ steps.version.outputs.version }}
         tags: |

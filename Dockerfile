@@ -1,5 +1,7 @@
 FROM openjdk:17-jdk-slim
 
+COPY overflow /overflow
+
 WORKDIR /overflow
 
 ARG OVERFLOW_VERSION
