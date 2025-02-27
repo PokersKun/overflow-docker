@@ -18,4 +18,4 @@ VOLUME ["/overflow"]
 
 RUN chmod +x start.sh
 
-CMD ["start.sh"]
+CMD ["/overflow/start.sh"]
