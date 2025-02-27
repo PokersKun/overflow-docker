@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-slim
 
-COPY ./overflow ./
+COPY ./overflow /overflow
 
 WORKDIR /overflow
 
