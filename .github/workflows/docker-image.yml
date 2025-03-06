@@ -21,11 +21,12 @@ jobs:
         LATEST=$(curl -s $METADATA_URL | grep -oP '<latest>\K[^<]+')
         echo "version=${LATEST}" >> $GITHUB_ENV
 
-    - name: Log in to Container Registry
+    - name: Log in to Alibaba Cloud Container Registry
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.REGISTRY_USERNAME }}  # Set these in your GitHub Secrets
         password: ${{ secrets.REGISTRY_PASSWORD }}  # Set these in your GitHub Secrets
+        registry: registry.cn-hangzhou.aliyuncs.com  # Adjust this based on your region
 
     - name: Build Docker image
       uses: docker/build-push-action@v5
@@ -35,8 +36,8 @@ jobs:
         build-args: |
           OVERFLOW_VERSION=${{ env.version }}
         tags: |
-          pocketfan233/overflow-docker:latest
-          pocketfan233/overflow-docker:${{ env.version }}
+          registry.cn-hangzhou.aliyuncs.com/pokerskun/overflow-docker:latest
+          registry.cn-hangzhou.aliyuncs.com/pokerskun/overflow-docker:${{ env.version }}
         push: true
       env:
         DOCKER_BUILDKIT: 1
