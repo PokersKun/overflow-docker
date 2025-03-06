@@ -6,7 +6,7 @@ WORKDIR /overflow
 
 ARG OVERFLOW_VERSION
 RUN apt-get update && \
-    apt-get install -y curl libgl1-mesa-glx && \
+    apt-get install -y curl libgl1-mesa-glx libfontconfig libfontconfig-dev && \
     mkdir -p content && \
     curl -o content/overflow-core-all-${OVERFLOW_VERSION}-all.jar \
     "https://repo.maven.apache.org/maven2/top/mrxiaom/mirai/overflow-core-all/${OVERFLOW_VERSION}/overflow-core-all-${OVERFLOW_VERSION}-all.jar" && \
