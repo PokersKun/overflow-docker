@@ -26,7 +26,6 @@ jobs:
       with:
         username: ${{ secrets.REGISTRY_USERNAME }}  # Set these in your GitHub Secrets
         password: ${{ secrets.REGISTRY_PASSWORD }}  # Set these in your GitHub Secrets
-        registry: registry.cn-hangzhou.aliyuncs.com  # Adjust this based on your region
 
     - name: Build Docker image
       uses: docker/build-push-action@v5
@@ -36,8 +35,8 @@ jobs:
         build-args: |
           OVERFLOW_VERSION=${{ env.version }}
         tags: |
-          registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:latest
-          registry.cn-hangzhou.aliyuncs.com/starfishes/overflow-docker:${{ env.version }}
+          pocketfan233/overflow-docker:latest
+          pocketfan233/overflow-docker:${{ env.version }}
         push: true
       env:
         DOCKER_BUILDKIT: 1
